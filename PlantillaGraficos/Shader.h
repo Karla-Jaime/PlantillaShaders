@@ -25,4 +25,5 @@ public:
 private:
 	GLuint shaderID;
 	void verificarCompilaicion(GLuint id);
+	void verificarVinculacion(GLuint id);
 };

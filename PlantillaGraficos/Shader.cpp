@@ -65,6 +65,10 @@ Shader::Shader(const char* rutaVertexShader, const char* rutaFragmentShader) {
 	glLinkProgram(shaderID);
 
 	//7.- Verificar si hubo error de vinculación 
+	verificarVinculacion(shaderID);
+
+	//8.- Usar el programa
+
 }
 //Parte del paso 4
 void Shader::verificarCompilaicion(GLuint id) {
@@ -90,7 +94,15 @@ void Shader::verificarCompilaicion(GLuint id) {
 		} 
 	}
 }
-
-//void Shader::verificarVinculacion(GLuint id) {
-//
-//}
+//Parte del paso 7
+void Shader::verificarVinculacion(GLuint id) {
+	GLint estadoVinculacion, estadoValidacion;
+	glGetProgramiv(id, GL_LINK_STATUS,&estadoVinculacion);
+	if (estadoVinculacion == GL_FALSE) {
+		cout << "No se pudo vincular el programa" << endl;
+	}
+	glGetProgramiv(id, GL_VALIDATE_STATUS, &estadoValidacion);
+	if (estadoValidacion == GL_FALSE) {
+		cout << "No se pudo validar  vinculacion" << endl;
+	}
+}
