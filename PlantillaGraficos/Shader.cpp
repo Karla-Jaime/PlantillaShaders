@@ -68,7 +68,7 @@ Shader::Shader(const char* rutaVertexShader, const char* rutaFragmentShader) {
 	verificarVinculacion(shaderID);
 
 	//8.- Usar el programa
-
+	glUseProgram(shaderID);
 }
 //Parte del paso 4
 void Shader::verificarCompilaicion(GLuint id) {
