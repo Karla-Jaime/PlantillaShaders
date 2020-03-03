@@ -12,81 +12,11 @@
 
 using namespace std;
 
-void dibujarLineaContinua(){
-	glBegin(GL_LINE_STRIP);
-	glColor3f(0.1f, 0.3f, 0.75f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.2f, 0.0f);
-	glVertex3f(0.4f, 0.2f, 0.0f);
-
-	glEnd();
-}
-void dibujarLineas(){
-	glBegin(GL_LINES);
-	glColor3f(0.2f, 0.1f, 0.1f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.2f, -0.1f, 0.0f);
-	glVertex3f(-0.3f, 0.1f, 0.0f);
-	glVertex3f(-0.3f, -0.1f, 0.0f);
-	glEnd();
-}
-void dibujarTriangulos() {
-	glBegin(GL_TRIANGLES);
-
-	//3f--> 3 flotantes 
-	//Se agrega la f para no crear conflictor y especificar double
-	//Establecemos Color
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-0.4f, 0.4f, 0.0f);
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.4f, 0.4f, 0.0f);
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.4f, -0.4f, 0.0f);
-	////
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.4f, -0.4f, 0.0f);
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-0.4f, 0.4f, 0.0f);
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-0.4f, -0.4f, 0.0f);
-	//Especificamos que dejaremos de dibujar 
-	glEnd();
-
-}
-void dibujarTrianContinuo() {
-	glBegin(GL_TRIANGLE_STRIP);
-	glColor3f(1.0f,1.0f,1.0f);
-
-	glVertex3f(0.0f,0.0f,0.0f);
-	glVertex3f(0.1f, 0.1f, 0.0f);
-	glVertex3f(0.2f, 0.0f, 0.0f);
-
-	glColor3f(0.2f, 0.8f, 1.0f);
-
-	glVertex3f(0.0f, 0.15f, 0.0f);
-
-	glEnd();
-}
-void poligonos() {
-	glBegin(GL_POLYGON);
-	//Necesita por lo menos 3v
-	glColor3f(1.0f,0.8f,0.1f);
-
-	glVertex3f(0.0f,0.0f,0.0f);
-	glVertex3f(0.0f, 0.5f, 0.0f);
-	glVertex3f(0.2f, 0.3f, 0.0f);
-
-	glColor3f(0.2f, 0.6f, 1.0f);
-	glVertex3f(0.2f, -0.4f, 0.0f);
-	glVertex3f(0.4f, -0.6f, 0.0f);
-
-	glEnd();
-}
 
 void dibujar() {
-	poligonos();
+	
 }
-//$(ProjectDir)include 
+
 int main()
 {
 	//Declarar una ventana 
@@ -130,7 +60,7 @@ int main()
 		//Establecer región de dibujo 
 		glViewport(0, 0, 600, 600);
 		//Establecemos el color de borrado
-		glClearColor(3, 0.8, 0.4, 1);
+		glClearColor(0.3, 0.6, 0.4, 1);
 		//Borrar
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
