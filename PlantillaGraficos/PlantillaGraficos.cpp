@@ -7,11 +7,48 @@
  
 #include"GL/glew.h"
 #include "GLFW/glfw3.h"
+#include <iostream>
 
-#include <iostream> 
+#include "Shader.h"
+#include "vertice.h"
+#include <vector>
+
 
 using namespace std;
+//Como una Lista de C#
+vector<Vertice> triangulo;
+//Cada elem. que queramos renderear necesita 
+//Un vertex array y un buffer;
+GLuint vertexArrayTrianguloID;
+GLuint bufferTrianguloID;
+//Para usar shader
 
+//Instancia del Shader
+Shader *shader;
+//Identificadores para mapeo de atributos
+//de entrada del vertex Shader
+GLuint posicionID;
+GLuint colorID;
+
+
+void inicializarTriangulo() {
+	Vertice v1 = {
+		vec3(0.0f,0.3f,0.0f),
+		vec4(0.8f,0.1f,0.0f,1.0f)
+	};
+	Vertice v2{
+		vec3(-0.3,-0.3f,0.0f),
+		vec4(0.8f,0.1f,0.0f,1.0f)
+	};
+	Vertice v3 = {
+		vec3(0.3,-0.3f,0.0f),
+		vec4(0.8f,0.1f,0.0f,1.0f)
+	};
+	triangulo.push_back(v1);
+	triangulo.push_back(v2);
+	triangulo.push_back(v3);
+	//
+}
 
 void dibujar() {
 	
@@ -53,6 +90,11 @@ int main()
 	const GLubyte  *versionGL = glGetString(GL_VERSION);
 
 	cout << "Version OpenGl: " << versionGL;
+	//
+	inicializarTriangulo();
+	const char* rutaVertexShader = "VertexShader.shader";
+	const char* rutaFragmentShader = "FragmentShader.shader";
+	shader = new Shader(rutaVertexShader,rutaFragmentShader);
 
 	//Clilo de dibujo (Draw loop)
 	while (!glfwWindowShouldClose(window)) {
