@@ -48,10 +48,23 @@ void inicializarTriangulo() {
 	triangulo.push_back(v2);
 	triangulo.push_back(v3);
 	//
+
+
 }
 
 void dibujar() {
-	
+	//Elegir shader
+	shader->enlazar();
+	//Elegir el vertexArray 
+	glBindVertexArray(vertexArrayTrianguloID);
+	//Llamar la funcion de dibujo-Dibujar
+	glDrawArrays(GL_TRIANGLES, 0, triangulo.size());
+
+	//Soltar Bind
+	glBindVertexArray(0);
+	//Soltar/desenlazar Shader
+	shader->desenlazar();
+
 }
 
 int main()
@@ -120,8 +133,10 @@ int main()
 	//Especificar a OpenGl como comunicarse posicion
 	glVertexAttribPointer(posicionID, 3, GL_FLOAT, GL_FALSE,sizeof(Vertice),0);
 	//Especificar a OpenGl como comunicarse con el color
-
-
+	glVertexAttribPointer(colorID,4,GL_FLOAT,GL_FALSE,sizeof(Vertice),(void*)sizeof(vec3));	
+	//Soltar el vertexArray y el buffer
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	//Clilo de dibujo (Draw loop)
 	while (!glfwWindowShouldClose(window)) {
