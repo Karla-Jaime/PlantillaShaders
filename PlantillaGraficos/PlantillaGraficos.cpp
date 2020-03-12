@@ -35,22 +35,24 @@ GLuint colorID;
 
 void inicializarCuadrado() {
 	Vertice V1 = {
-		vec3(-0.2f,0.2f,0.0f),
-		vec4(0.1f,0.8f,0.2f,1.0f)
+		vec3(-1.0f,-0.6f,0.0f),
+		vec4(0.15f,0.30f,0.00f,1.0f)
 	};
 	Vertice V2 = {
-		vec3(0.2f,0.2f,0.0f),
-		vec4(0.1f,0.8f,0.2f,1.0f)
+		vec3(1.0f,-0.6f,0.0f),
+		vec4(0.15f,0.30f,0.00f,1.0f)
 	};
 	Vertice V3 = {
-		vec3(0.2f,-0.2f,0.0f),
-		vec4(0.1f,0.8f,0.2f,1.0f)
+		vec3(1.0f,-1.0f,0.0f),
+		vec4(0.15f,0.30f,0.00f,1.0f)
 
 	};
 	Vertice V4 = {
-		vec3(-0.2f,-0.2f,0.0f),
-		vec4(0.1f,0.8f,0.2f,1.0f)
+		vec3(-1.0f,-1.0f,0.0f),
+		vec4(0.15f,0.30f,0.00f,1.0f)
 	};
+
+
 	cuadrado.push_back(V1);
 	cuadrado.push_back(V2);
 	cuadrado.push_back(V3);
@@ -60,20 +62,25 @@ void inicializarCuadrado() {
 
 void inicializarTriangulo() {
 	Vertice v1 = {
-		vec3(0.0f,0.3f,0.0f),
+		vec3(0.25f,0.3f,0.0f),
 		vec4(0.8f,0.1f,0.0f,1.0f)
 	};
-	Vertice v2{
-		vec3(-0.3,-0.3f,0.0f),
+	Vertice v2 = {
+		vec3(-0.25,0.3f,0.0f),
 		vec4(0.8f,0.1f,0.0f,1.0f)
 	};
 	Vertice v3 = {
-		vec3(0.3,-0.3f,0.0f),
+		vec3(-0.8,-0.6f,0.0f),
+		vec4(0.8f,0.1f,0.0f,1.0f)
+	};
+	Vertice v4 = {
+		vec3(0.8,-0.6f,0.0f),
 		vec4(0.8f,0.1f,0.0f,1.0f)
 	};
 	triangulo.push_back(v1);
 	triangulo.push_back(v2);
 	triangulo.push_back(v3);
+	triangulo.push_back(v4);
 	//
 
 
@@ -85,7 +92,7 @@ void dibujar() {
 	//Elegir el vertexArray 
 	glBindVertexArray(vertexArrayTrianguloID);
 	//Llamar la funcion de dibujo-Dibujar
-	glDrawArrays(GL_TRIANGLES, 0, triangulo.size());
+	glDrawArrays(GL_QUADS, 0, triangulo.size());
 
 	//Cuadrado
 	glBindVertexArray(vertexArrayCuadradoID);
@@ -185,6 +192,7 @@ int main()
 
 	
 
+	
 
 
 	//Clilo de dibujo (Draw loop)
@@ -193,7 +201,7 @@ int main()
 		//Establecer región de dibujo 
 		glViewport(0, 0, 600, 600);
 		//Establecemos el color de borrado
-		glClearColor(0.3, 0.6, 0.4, 1);
+		glClearColor(0.49, 0.73, 0.91,1);
 		//Borrar
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
