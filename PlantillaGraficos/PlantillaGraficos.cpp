@@ -1,22 +1,26 @@
 // PlantillaGraficos.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
-
 #include <stdio.h> 
 #include <stdlib.h> 
 #define GLEW_STATIC 
- 
+ //
 #include"GL/glew.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
-
+//
 #include "Shader.h"
 #include "vertice.h"
 #include <vector>
-
+//
+#include "glm/glm.hpp"
+#include "glm/gtx/transform.hpp"
 
 using namespace std;
+using namespace glm;
+
 //Como una Lista de C#
 vector<Vertice> triangulo;
+mat4 transformacionesTriangulo;
+
 //Cada elem. que queramos renderear necesita 
 //Un vertex array y un buffer;
 GLuint vertexArrayTrianguloID;
@@ -32,24 +36,25 @@ Shader *shader;
 //de entrada del vertex Shader
 GLuint posicionID;
 GLuint colorID;
+GLuint transformacionID;
 
 void inicializarCuadrado() {
 	Vertice V1 = {
-		vec3(-1.0f,-0.6f,0.0f),
-		vec4(0.15f,0.30f,0.00f,1.0f)
+		vec4(-0.2f,0.2f,0.0f,1.0f),
+		vec4(0.1f,0.8f,0.2f,1.0f)
 	};
 	Vertice V2 = {
-		vec3(1.0f,-0.6f,0.0f),
-		vec4(0.15f,0.30f,0.00f,1.0f)
+		vec4(0.2f,0.2f,0.0f,1.0f),
+		vec4(0.1f,0.8f,0.2f,1.0f)
 	};
 	Vertice V3 = {
-		vec3(1.0f,-1.0f,0.0f),
-		vec4(0.15f,0.30f,0.00f,1.0f)
+		vec4(0.2f,-0.2f,0.0f,1.0f),
+		vec4(0.1f,0.8f,0.2f,1.0f)
 
 	};
 	Vertice V4 = {
-		vec3(-1.0f,-1.0f,0.0f),
-		vec4(0.15f,0.30f,0.00f,1.0f)
+		vec4(-0.2f,-0.2f,0.0f,1.0f),
+		vec4(0.1f,0.8f,0.2f,1.0f)
 	};
 
 
@@ -62,27 +67,23 @@ void inicializarCuadrado() {
 
 void inicializarTriangulo() {
 	Vertice v1 = {
-		vec3(0.25f,0.3f,0.0f),
+		vec4(0.0f,0.3f,0.0f,1.0f),
 		vec4(0.8f,0.1f,0.0f,1.0f)
 	};
 	Vertice v2 = {
-		vec3(-0.25,0.3f,0.0f),
+		vec4(-0.3,-0.3f,0.0f,1.0f),
 		vec4(0.8f,0.1f,0.0f,1.0f)
 	};
 	Vertice v3 = {
-		vec3(-0.8,-0.6f,0.0f),
+		vec4(0.3,-0.3f,0.0f,1.0f),
 		vec4(0.8f,0.1f,0.0f,1.0f)
 	};
-	Vertice v4 = {
-		vec3(0.8,-0.6f,0.0f),
-		vec4(0.8f,0.1f,0.0f,1.0f)
-	};
+	
 	triangulo.push_back(v1);
 	triangulo.push_back(v2);
 	triangulo.push_back(v3);
-	triangulo.push_back(v4);
-	//
-
+	//Matriz identidad
+	transformacionesTriangulo = mat4(1.0f);
 
 }
 
@@ -92,7 +93,7 @@ void dibujar() {
 	//Elegir el vertexArray 
 	glBindVertexArray(vertexArrayTrianguloID);
 	//Llamar la funcion de dibujo-Dibujar
-	glDrawArrays(GL_QUADS, 0, triangulo.size());
+	glDrawArrays(GL_TRIANGLES, 0, triangulo.size());
 
 	//Cuadrado
 	glBindVertexArray(vertexArrayCuadradoID);
@@ -155,6 +156,7 @@ int main()
 	//Mapeo de atributos
 	posicionID = glGetAttribLocation(shader->getID(), "posicion");
 	colorID = glGetAttribLocation(shader->getID(), "color");
+	transformacionID = glGetUniformLocation(shader->getID(), "transformaciones");
 
 	shader->desenlazar();
 
